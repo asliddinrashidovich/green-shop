@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+.slider_css {
+  background: linear-gradient(97.77deg, rgba(245, 245, 245, 0.5) -23.46%, rgba(245, 245, 245, 0.5) 107.51%) !important;
+  /* background-color: #999 !important; */
+}
+.swiper-pagination-bullet {
+  background-color: #eee;
+  color: #333;
+  font-weight: bold;
+  width: 20px !important;
+  height: 5px !important;
+  margin: 0 4px;
+  cursor: pointer;
+  border-radius:  4px !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #46A358 !important;
+  width: 28px !important;
+  color: #fff;
+  transform: scale(1.1);
+}
