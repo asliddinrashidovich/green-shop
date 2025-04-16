@@ -12,3 +12,18 @@ export const heroSlider = [
         img: '/hero/hero-flower-2.png',
     }
 ]
+
+export const footerContactCards = [
+    {
+        text: 'Garden Care',
+        img: '/footer/footer_flower_1.svg'
+    },
+    {
+        text: 'Plant Renovation',
+        img: '/footer/footer_flower_2.svg'
+    },
+    {
+        text: 'Watering Graden',
+        img: '/footer/footer_flower_1.svg'
+    }
+]

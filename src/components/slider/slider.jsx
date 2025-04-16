@@ -15,7 +15,7 @@ export default function Slider() {
   };
 
   return (
-    <div className='max-w-[1200px] px-[10px] md:px-[40px] slider_css  mx-auto h-[330px] md:h-[450px]'>
+    <div className='max-w-[1200px] px-[10px] md:px-[40px] slider_css mb-[30px] mx-auto h-[330px] md:h-[450px]'>
       <Swiper
         pagination={pagination}
         modules={[Pagination, Autoplay]}
