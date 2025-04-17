@@ -28,7 +28,7 @@ function Navbar() {
       <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: 'none', maxWidth: '1200px', mx: 'auto', paddingTop: '25px', paddingBottom: '18px' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box display="flex" alignItems="center" sx={{cursor: 'pointer'}}>
-            <img src="/public/navbar/main_logo.svg" alt="logo" style={{ height: 40}} />
+            <img src="/navbar/main_logo.svg" alt="logo" style={{ height: 40}} />
           </Box>
 
           <Box sx={{display: {xs: 'none', md: 'flex'}}}  gap={'50px'} alignItems="center">
@@ -75,7 +75,7 @@ function Navbar() {
                     </Typography>
                 </Button>
                 <IconButton  sx={{display: {xs: 'flex', md: 'none'}}} onClick={toggleDrawer(true)}>
-                    <img src="/public/navbar/menu_bar_icon.svg" alt="" />
+                    <img src="/navbar/menu_bar_icon.svg" alt="" />
                 </IconButton>
             </Box>
           </Box>

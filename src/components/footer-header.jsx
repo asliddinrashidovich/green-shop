@@ -1,7 +1,7 @@
 function FooterHeader() {
   return (
     <div className="max-w-[1200px] bg-[#46A3581A] border-y-[1px] border-[#46A358] px-[10px] md:px-[30px] gap-[10px] md:gap-[60px] flex-col md:flex-row flex items-center justify-between mx-auto py-[25px]">
-        <img src="/public/navbar/main_logo.svg" className="mb-[30px] md:mb-[0]" alt="" />
+        <img src="/navbar/main_logo.svg" className="mb-[30px] md:mb-[0]" alt="" />
         <div className="flex items-center gap-[15px]">
             <img src="/footer/Location.svg" alt="" />
             <p className="text-[14px] font-[400] leading-[22px]">70 West Buckingham Ave. <br />

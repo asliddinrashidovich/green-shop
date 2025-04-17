@@ -29,23 +29,23 @@ function Footer() {
             <Typography variant="h5" sx={{fontWeight: '700', fontSize: '18px', color:'#3D3D3D', marginBottom: '20px'}}>Social Media</Typography>
             <Box sx={{display: 'flex', gap: '10px', marginBottom: '33px'}}>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <img src="/public/footer/Facebook.svg" className="w-[8px]" alt="facebook" />
+                <img src="/footer/Facebook.svg" className="w-[8px]" alt="facebook" />
               </Box>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <img src="/public/footer/Instagram.svg" className="w-[14px]" alt="facebook" />
+                <img src="/footer/Instagram.svg" className="w-[14px]" alt="facebook" />
               </Box>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <img src="/public/footer/Twitter.svg" className="w-[16px]" alt="facebook" />
+                <img src="/footer/Twitter.svg" className="w-[16px]" alt="facebook" />
               </Box>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <img src="/public/footer/Linkedin.svg" className="w-[14px]" alt="facebook" />
+                <img src="/footer/Linkedin.svg" className="w-[14px]" alt="facebook" />
               </Box>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <img src="/public/footer/Union.svg" className="w-[18px]" alt="facebook" />
+                <img src="/footer/Union.svg" className="w-[18px]" alt="facebook" />
               </Box>
             </Box>
             <Typography variant="h5" sx={{fontWeight: '700', fontSize: '18px', color:'#3D3D3D', marginBottom: '20px'}}>We accept</Typography>
-            <img src="/public/footer/payload.png" className="cursor-pointer" alt="" />
+            <img src="/footer/payload.png" className="cursor-pointer" alt="" />
           </Box>
           <Box></Box>
         </Box>
