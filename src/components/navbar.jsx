@@ -33,10 +33,10 @@ function Navbar() {
 
           <Box sx={{display: {xs: 'none', md: 'flex'}}}  gap={'50px'} alignItems="center">
             <Button sx={{ color: '#3D3D3D', fontSize: '16px', fontWeight: '400', lineHeight: '100%',}}>
-                <Link to={'/home'}>Home</Link>
+                <Link to={'/'}>Home</Link>
             </Button>
             <Button sx={{ color: '#3D3D3D', fontSize: '16px', fontWeight: '400', lineHeight: '100%',}}>
-                <Link to={'/shop'}>Shop</Link>
+                <Link to={'/blog'}>Blog</Link>
             </Button>
           </Box>
 
