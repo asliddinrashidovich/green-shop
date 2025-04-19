@@ -126,7 +126,7 @@ function Categories() {
               </div>
               <div className="flex lg:hidden cursor-pointer">
                 <Button onClick={handleOpen}>
-                  <img src="/public/flowers/modal_change.svg" alt="change modal" />
+                  <img src="/flowers/modal_change.svg" alt="change modal" />
                 </Button>
                 <Modal className="w-full h-full py-[20px] px-[30px] overflow-auto flex justify-center items-center" open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                   <Box sx={{backgroundColor: '#fff', height: 'auto', marginTop: '20px',  borderRadius: '15px', maxWidth: '500px', width: '100%', padding:'30px'}}>
