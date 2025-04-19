@@ -16,7 +16,7 @@ function BlogsAll() {
 
     console.log(blog)
   return (
-    <div className="max-w-[1200px] mx-auto grid-cols-3 grid py-[40px] gap-[30px] px-[40px]">
+    <div className="max-w-[1200px] mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid py-[40px] gap-[30px] px-[40px]">
         {blog?.data.map((item) => (
             <div key={item._id} className="border-[0.5px] border-[#A5A5A5]  rounded-[15px]">
                 <h2 className="text-[20px] px-[20px] pt-[20px] font-[500] leading-[100%] mb-[20px]">{item.title}</h2>
