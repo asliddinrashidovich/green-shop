@@ -1,6 +1,5 @@
 import { Box, Button, FormControl, MenuItem, Modal, Select, Slider } from "@mui/material"
-import useGetData from "../hooks/getData"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import MainButton from "./button"
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -16,7 +15,7 @@ function Categories() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // getting APIs
+    // getting APIs
     const fetchCategory = async () => {
       const res = await axios.get(`https://green-shop-backend.onrender.com/api/flower/category?access_token=6506e8bd6ec24be5de357927`);
       return res.data;
@@ -30,15 +29,15 @@ function Categories() {
       return res.data;
     };
 
-    const { data: categoryData, isLoading: loading1, error: error1 } = useQuery({
+    const { data: categoryData} = useQuery({
       queryKey: ["category"],
       queryFn: fetchCategory,
     });
-    const { data: discountData, isLoading: loading2, error: error2 } = useQuery({
+    const { data: discountData } = useQuery({
       queryKey: ["discount"],
       queryFn: fetchDiscount,
     });
-    const { data: flowersData, isLoading: loading3, error: error3 } = useQuery({
+    const { data: flowersData } = useQuery({
       queryKey: ["flowers", categoryBy],
       queryFn: () => fetchFlowersByCategory(categoryBy),
     });
@@ -49,7 +48,6 @@ function Categories() {
     const handleChangeSlider = (event, newValue) => {
       setValue(newValue);
     };
-
     function handleActiveCategory(path) {
       setCategoryBy(path)
       setActiveCategory(path)

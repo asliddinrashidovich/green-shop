@@ -99,10 +99,14 @@ function Navbar() {
 
         <List>
           <ListItem button>
-            <ListItemText primary="Home" primaryTypographyProps={{ color: 'green' }} />
+            <Link to={'/'}>
+              <ListItemText primary="Home" primaryTypographyProps={{ color: 'green' }} />
+            </Link>
           </ListItem>
           <ListItem button>
-            <ListItemText primary="Blog" primaryTypographyProps={{ color: 'green' }} />
+            <Link to={'/blog'}>
+              <ListItemText primary="Blog" primaryTypographyProps={{ color: 'green' }} />
+            </Link>
           </ListItem>
         </List>
 
