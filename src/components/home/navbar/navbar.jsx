@@ -10,12 +10,14 @@ import {
     List,
     ListItem,
     ListItemText,
+    Modal,
   } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import LoginIcon from '@mui/icons-material/Login';
+import BasicTabs from '../../auth/login-modal';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -23,6 +25,9 @@ function Navbar() {
   const toggleDrawer = (state) => () => {
     setOpen(state);
   };
+  const [open2, setOpen2] = useState(false);
+  const handleOpen = () => setOpen2(true);
+  const handleClose = () => setOpen2(false);
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: 'none', maxWidth: '1200px', mx: 'auto', paddingTop: '25px', paddingBottom: '18px' }}>
@@ -53,10 +58,8 @@ function Navbar() {
                 <img src="/navbar/shop_icon.svg" alt="" />
               </Badge>
             </IconButton>
-
-            
-            <Box>
-                <Button
+            <Box onClick={handleOpen}>
+              <Button
                 variant="contained"
                 sx={{
                     backgroundColor: '#46A358',
@@ -78,6 +81,17 @@ function Navbar() {
                     <img src="/navbar/menu_bar_icon.svg" alt="" />
                 </IconButton>
             </Box>
+            <Modal
+              className="w-full h-full py-[20px] px-[30px] overflow-auto flex justify-center items-center"
+              open={open2}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={{backgroundColor: '#fff', height: 'auto', marginTop: '20px',  borderRadius: '15px', maxWidth: '500px', width: '100%', padding:'30px'}}>
+                <BasicTabs/>
+              </Box>
+            </Modal>
           </Box>
         </Toolbar>
       </AppBar>

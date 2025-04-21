@@ -1,11 +1,9 @@
-import BlogsAll from "../components/blogs"
-import FooterContact from "../components/contact"
-import FooterHeader from "../components/footer-header"
+import { BlogPage, FooterContact, FooterHeader } from "../components"
 
 function Homepage() {
   return (
     <>
-        <BlogsAll/>
+        <BlogPage/>
         <FooterContact/>  
         <FooterHeader/>
     </>

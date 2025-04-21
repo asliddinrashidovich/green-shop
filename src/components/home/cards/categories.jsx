@@ -1,6 +1,6 @@
 import { Box, Button, FormControl, MenuItem, Modal, Select, Slider } from "@mui/material"
 import { useState } from "react"
-import MainButton from "./button"
+import MainButton from "../../button/button"
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 

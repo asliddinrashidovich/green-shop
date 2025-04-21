@@ -1,17 +1,12 @@
-import Blog from "../components/blog"
-import Categories from "../components/categories"
-import FooterContact from "../components/contact"
-import FooterHeader from "../components/footer-header"
-import Hero from "../components/hero"
-import Trends from "../components/trends"
+import { BlogsSection, CategoriesSection, FooterContact, FooterHeader, Hero, TrendsSection } from "../components"
 
 function Homepage() {
   return (
     <>
         <Hero/> 
-        <Categories/>
-        <Trends/>
-        <Blog/>
+        <CategoriesSection/>
+        <TrendsSection/>
+        <BlogsSection/>
         <FooterContact/>  
         <FooterHeader/>
     </>

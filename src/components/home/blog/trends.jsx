@@ -1,4 +1,4 @@
-import MainButton from './button'
+import MainButton from "../../button/button"
 
 function Trends() {
   return (

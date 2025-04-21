@@ -1,4 +1,4 @@
-import { footerContactCards } from "../data/data"
+import { footerContactCards } from "../../../data/data"
 
 function FooterContact() {
   return (
