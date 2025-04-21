@@ -14,13 +14,16 @@ import {
   } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import LoginIcon from '@mui/icons-material/Login';
 import BasicTabs from '../../auth/login-modal';
+import { Toaster } from 'react-hot-toast';
+import MainButton from '../../button/button';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const user = JSON.parse(localStorage.getItem('user'))
+  console.log(user)
 
   const toggleDrawer = (state) => () => {
     setOpen(state);
@@ -44,6 +47,10 @@ function Navbar() {
                 <Link to={'/blog'}>Blog</Link>
             </Button>
           </Box>
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+          />
 
           <Box display="flex" sx={{gap: {xs: '15px', md:'30px'}}} alignItems="center">
             <IconButton>
@@ -58,9 +65,10 @@ function Navbar() {
                 <img src="/navbar/shop_icon.svg" alt="" />
               </Badge>
             </IconButton>
-            <Box onClick={handleOpen}>
-              <Button
+            <Box >
+                {!user && <Button
                 variant="contained"
+                onClick={handleOpen}
                 sx={{
                     backgroundColor: '#46A358',
                     textTransform: 'none',
@@ -72,15 +80,24 @@ function Navbar() {
                     '&:hover': { backgroundColor: '#388e3c' },
                 }}
                 >
+                  
                     <img src="/navbar/Logout.svg" alt="" />
                     <Typography sx={{fontSize: '16px', fontWeight: '400', lineHeight: '100%'}}>
                         Login
                     </Typography>
-                </Button>
+                </Button>}
+                {user && (
+                  <Box  sx={{display: {xs: 'none', md: 'flex'}}}>
+                    <Link to={'/profile'}>
+                      <MainButton>{user.name}</MainButton>
+                    </Link>
+                  </Box>
+                )}
                 <IconButton  sx={{display: {xs: 'flex', md: 'none'}}} onClick={toggleDrawer(true)}>
                     <img src="/navbar/menu_bar_icon.svg" alt="" />
                 </IconButton>
             </Box>
+            
             <Modal
               className="w-full h-full py-[20px] px-[30px] overflow-auto flex justify-center items-center"
               open={open2}
@@ -88,8 +105,8 @@ function Navbar() {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={{backgroundColor: '#fff', height: 'auto', marginTop: '20px',  borderRadius: '15px', maxWidth: '500px', width: '100%', padding:'30px'}}>
-                <BasicTabs/>
+              <Box sx={{backgroundColor: '#fff', height: 'auto', marginTop: '20px',  borderRadius: '15px', maxWidth: '500px', width: '100%', padding: {xs: '10px', md: '30px'}}}>
+                <BasicTabs setOpen2={setOpen2}/>
               </Box>
             </Modal>
           </Box>
@@ -124,14 +141,19 @@ function Navbar() {
           </ListItem>
         </List>
 
-        <Button
+        {!user && <Button
           variant="contained"
           fullWidth
           startIcon={<LoginIcon />}
           sx={{ mt: 3, backgroundColor: 'green', borderRadius: 1 }}
         >
           Login
-        </Button>
+        </Button>}
+        {user && (
+          <div className='flex '>
+            <MainButton>{user.name}</MainButton>
+          </div>
+        )}
       </Drawer>
     </>
   )

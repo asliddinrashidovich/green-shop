@@ -10,3 +10,12 @@ export {default as Navbar} from './home/navbar/navbar'
 export {default as Hero} from './home/hero/hero'
 export {default as Slider} from './slider/slider'
 export {default as CategoriesSection} from './home/cards/categories'
+export {default as ProfileSection} from './profile/profile'
+export {default as AccountDetails} from './profile/account-details'
+export {default as Address} from './profile/address'
+export {default as MyProducts} from './profile/my-products'
+export {default as Profile} from './profile/profile'
+export {default as Wishlist} from './profile/wishlist'
+export {default as TrackOrder} from './profile/track-order'
+
+

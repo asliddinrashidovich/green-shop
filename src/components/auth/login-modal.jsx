@@ -1,13 +1,14 @@
-// import * as React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import MainButton from '../button/button';
-import axios from 'axios';
 import { useState } from 'react';
-import FormLogin from './form';
+import FormLogin from './form-login';
+import FormRegister from './form-register';
 
+BasicTabs.propTypes  = {
+  setOpen2: PropTypes.func.isRequired
+}
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -36,18 +37,9 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({setOpen2}) {
   const [valueTab, setValueTab] = useState(0);
-  const [name, setName] = useState('')
-  const [surname, setSurname] = useState('')
-  const [password, setPassword] = useState('')
   
-  const [email, setEmail] = useState('')
-    const postRegister = async () => {
-        await axios.post(`https://green-shop-backend.onrender.com/api/user/sign-up?access_token=6506e8bd6ec24be5de357927`, {name, surname, password, email}).then((res) => {
-            console.log(res)
-        })
-    };
 
   const handleChange = (event, newValue) => {
     setValueTab(newValue);
@@ -56,45 +48,16 @@ export default function BasicTabs() {
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={valueTab} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Login" {...a11yProps(0)} />
+        <Tabs value={valueTab} onChange={handleChange} style={{display: 'flex', justifyContent: 'center', width:'200px', margin: 'auto'}} aria-label="basic tabs example" > 
+          <Tab label="Login" {...a11yProps(0)}/>
           <Tab label="Register" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={valueTab} index={0}>
-        {/* <form>
-            <h2>Enter your username and password to login.</h2>
-            <label htmlFor="email">
-                <input className='w-full p-[10px] my-[5px]' type="text" placeholder='email'/>
-            </label>
-            <label htmlFor="email">
-                <input className='w-full p-[10px] my-[5px]' type="text" placeholder='password'/>
-            </label>
-            <button>
-                <MainButton>Submit</MainButton>
-            </button>
-        </form> */}
-        <FormLogin/>
+        <FormLogin setOpen2={setOpen2}/>
       </CustomTabPanel>
       <CustomTabPanel value={valueTab} index={1}>
-        <form onSubmit={postRegister}>
-            <h2>Enter your email and password to register.</h2>
-            <label htmlFor="name">
-                <input value={name} onChange={(e) => setName(e.target.value)} className='w-full p-[10px] my-[5px]' type="text" placeholder='name'/>
-            </label>
-            <label htmlFor="surname">
-                <input value={surname} onChange={(e) => setSurname(e.target.value)} className='w-full p-[10px] my-[5px]' type="text" placeholder='surname'/>
-            </label>
-            <label htmlFor="email">
-                <input value={email} onChange={(e) => setEmail(e.target.value)} className='w-full p-[10px] my-[5px]' type="email" placeholder='email'/>
-            </label>
-            <label htmlFor="password">
-                <input value={password} onChange={(e) => setPassword(e.target.value)} className='w-full p-[10px] my-[5px]' type="password" placeholder='password'/>
-            </label>
-            <button type='submit' >
-                <MainButton>Submit</MainButton>
-            </button>
-        </form>
+        <FormRegister setOpen2={setOpen2}/>
       </CustomTabPanel>
     </Box>
   );

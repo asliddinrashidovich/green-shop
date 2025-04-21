@@ -2,7 +2,7 @@ import { Button, Typography } from "@mui/material"
 import PropTypes  from 'prop-types'
 
 MainButton.propTypes  = {
-    children: PropTypes.string.isRequired
+  children: PropTypes.node.isRequired
 }
 
 function MainButton({children}) {
