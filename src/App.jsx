@@ -1,11 +1,11 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
 import MainLayout from "./layout/main-layout"
 import Homepage from "./pages/homepage"
-import Blogpage from "./pages/blog"
 import ProfilePage from "./pages/profile"
 import { AccountDetails, Address, MyProducts, TrackOrder, Wishlist } from "./components"
 import NotFound from "./pages/not-found"
 import PropTypes from "prop-types"
+import BlogsPage from "./pages/blog"
 
 App.propTypes  = {
   children: PropTypes.node.isRequired
@@ -26,7 +26,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Homepage/>}/>
-        <Route path="blog" element={<Blogpage/>}/>
+        <Route path="blog" element={<BlogsPage/>}/>
         <Route path="profile/" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}>
           <Route index element={<ProtectedRoute><AccountDetails/></ProtectedRoute>}/>
           <Route path="my-products" element={<ProtectedRoute><MyProducts/></ProtectedRoute>}/>

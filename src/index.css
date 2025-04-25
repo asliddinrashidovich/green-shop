@@ -25,3 +25,12 @@
 .width {
   width: 100% !important;
 }
+.input-search {
+  width: 400px;
+}
+
+@media (max-width: 900px) {
+  .input-search {
+    width: 200px;
+  }
+}

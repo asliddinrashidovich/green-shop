@@ -1,8 +1,14 @@
-import { BlogPage, FooterContact, FooterHeader } from "../components"
+import { BlogPage, FooterContact, FooterHeader, UnauthCase, WithAuthCase } from "../components"
 
-function Homepage() {
+function BlogsPage() {
+  const auth = localStorage.getItem('user')
   return (
     <>
+        {auth ? (
+          <WithAuthCase/>
+        ) : (
+          <UnauthCase/>
+        )}
         <BlogPage/>
         <FooterContact/>  
         <FooterHeader/>
@@ -10,4 +16,4 @@ function Homepage() {
   )
 }
 
-export default Homepage
+export default BlogsPage
