@@ -19,5 +19,6 @@ export {default as Wishlist} from './profile/wishlist'
 export {default as TrackOrder} from './profile/track-order'
 export {default as UnauthCase} from './blog/unauth-case'
 export {default as WithAuthCase} from './blog/with-auth'
+export {default as BlogDetails} from './blog/blog-details'
 
 

@@ -33,9 +33,9 @@ function FormLogin({setOpen2}) {
         localStorage.setItem('user', JSON.stringify(res.data.data.user))
       }).catch((err) => {
         if(err.status == 409) {
-          toast.error('User Not found, please Try again')
+          toast.error('Email already exists')
         } else {
-          toast.error('Something went wrong')
+          toast.error('Email already exists')
         }
       })
   }

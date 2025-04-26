@@ -5,19 +5,19 @@ function UnauthCase() {
     <div className="max-w-[1200px]  mx-auto  my-[20px]  px-[40px]">
       <div className="bg-[#f5f5f5] flex justify-between gap-[30px] px-[40px] py-[60px]">
         <div className="max-w-[400px]">
-          <img src="/public/blog/blog_avatar_1.png" className="w-full translate-y-[-10px]" alt="avatar 1" />
+          <img src="/blog/blog_avatar_1.png" className="w-full translate-y-[-10px]" alt="avatar 1" />
         </div>
         <div className="max-w-[200px]">
-          <img src="/public/blog/blog_avatar_2.png" className="w-full translate-y-[30px]" alt="avatar 2" />
+          <img src="/blog/blog_avatar_2.png" className="w-full translate-y-[30px]" alt="avatar 2" />
         </div>
         <div className="max-w-[200px]">
-          <img src="/public/blog/blog_avatar_3.png" className="w-full translate-y-[50px]" alt="avatar 3" />
+          <img src="/blog/blog_avatar_3.png" className="w-full translate-y-[50px]" alt="avatar 3" />
         </div>
         <div className="max-w-[200px]">
-          <img src="/public/blog/blog_avatar_4.png" className="w-full translate-y-[30px]" alt="avatar 4" />
+          <img src="/blog/blog_avatar_4.png" className="w-full translate-y-[30px]" alt="avatar 4" />
         </div>
         <div className="max-w-[200px]">
-          <img src="/public/blog/blog_avatar_5.png" className="w-full translate-y-[0px]" alt="avatar 5" />
+          <img src="/blog/blog_avatar_5.png" className="w-full translate-y-[0px]" alt="avatar 5" />
         </div>
       </div>
       <div className='text-center'>

@@ -2,7 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import MainLayout from "./layout/main-layout"
 import Homepage from "./pages/homepage"
 import ProfilePage from "./pages/profile"
-import { AccountDetails, Address, MyProducts, TrackOrder, Wishlist } from "./components"
+import { AccountDetails, Address, BlogDetails, MyProducts, TrackOrder, Wishlist } from "./components"
 import NotFound from "./pages/not-found"
 import PropTypes from "prop-types"
 import BlogsPage from "./pages/blog"
@@ -26,7 +26,8 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<MainLayout/>}>
         <Route index element={<Homepage/>}/>
-        <Route path="blog" element={<BlogsPage/>}/>
+        <Route path="blog" element={<BlogsPage/>}></Route>
+        <Route path="blog/:id" element={<BlogDetails/>}/>
         <Route path="profile/" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}>
           <Route index element={<ProtectedRoute><AccountDetails/></ProtectedRoute>}/>
           <Route path="my-products" element={<ProtectedRoute><MyProducts/></ProtectedRoute>}/>

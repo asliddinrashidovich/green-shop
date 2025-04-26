@@ -50,9 +50,9 @@ function ProfileSection() {
                 </div>
             </div>
             <hr className="border-[0.5px] border-[#46A358] my-[30px]"/>
-            <button  onClick={showModal} className="flex gap-[11px] items-center  pl-[20px] cursor-pointer"> 
-                <img src="/profile/Logout.svg" alt="logout" />
-                <p className="font-[700] text-[15px] text-[#727272] leading-[45px]">Logout</p>
+            <button  onClick={showModal} className="flex gap-[11px] text-[#e04242] items-center  pl-[20px] cursor-pointer"> 
+                <img src="/profile/Logout.svg" alt="logout"  className="text-inherit border-[#e04242]"/>
+                <p className="font-[700] text-[15px] text-inherit leading-[45px]">Logout</p>
             </button>
             <Modal title="❗Do you want to logout?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <p className="text-[15px] font-[500]">Please make sure, bacause this action cannot be undone!</p>
