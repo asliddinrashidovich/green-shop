@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { signInWithGoogle } from '../../../firebase';
+import { signInWithGoogle } from './firebase';
 
 FormLogin.propTypes  = {
   setOpen2: PropTypes.func.isRequired
