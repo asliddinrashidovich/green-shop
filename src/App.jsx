@@ -6,6 +6,7 @@ import { AccountDetails, Address, BlogDetails, MyProducts, TrackOrder, Wishlist 
 import NotFound from "./pages/not-found"
 import PropTypes from "prop-types"
 import BlogsPage from "./pages/blog"
+import ProductDetailsPage from "./pages/product-details-page"
 
 App.propTypes  = {
   children: PropTypes.node.isRequired
@@ -28,6 +29,7 @@ function App() {
         <Route index element={<Homepage/>}/>
         <Route path="blog" element={<BlogsPage/>}></Route>
         <Route path="blog/:id" element={<BlogDetails/>}/>
+        <Route path="shop/:category/:id" element={<ProductDetailsPage/>}/>
         <Route path="profile/" element={<ProtectedRoute><ProfilePage/></ProtectedRoute>}>
           <Route index element={<ProtectedRoute><AccountDetails/></ProtectedRoute>}/>
           <Route path="my-products" element={<ProtectedRoute><MyProducts/></ProtectedRoute>}/>

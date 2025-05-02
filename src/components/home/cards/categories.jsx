@@ -3,7 +3,7 @@ import { useState } from "react"
 import MainButton from "../../button/button"
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function Categories() {
   const [age, setAge] = useState('default-sorting');
@@ -84,7 +84,7 @@ function Categories() {
     const handleChangeSlider = (event, newValue) => {
       setValue(newValue);
     };
-    // console.log(flowersData)
+    console.log(flowersData)
   return (
     <div className="max-w-[1200px] mx-auto flex gap-[50px] px-[20px] sm:px-[40px]">
         <div className="py-[14px] px-[20px] hidden lg:flex md:flex-col w-[310px]">
@@ -180,7 +180,7 @@ function Categories() {
               {flowersData?.data?.map((item) => (
                 <div key={item.title}>
                   <div className="flex group overflow-hidden justify-center relative w-full h-[300px] items-center bg-[#FBFBFB] mb-3">
-                    <img src={item.main_image} alt="" />
+                    <img src={item.main_image} alt="main image" />
                     <div className="hidden gap-[20px] group-hover:flex items-center absolute bottom-[10px]">
                       <img className="cursor-pointer" src="/navbar/shop_icon.svg" alt="shop" />
                       <img className="cursor-pointer" src="/flowers/like.svg" alt="like" />
@@ -190,7 +190,7 @@ function Categories() {
                       <MainButton >13% OFF</MainButton>
                     </div>}
                   </div>
-                  <h2 className="text-[16px] font-[400] leading-[16px] text-[#3D3D3D] mb-[6px]">{item.title}</h2>
+                  <Link to={`/shop/${item.category}/${item._id}`} className="text-[16px] font-[400] leading-[16px] text-[#3D3D3D] mb-[6px]">{item.title}</Link>
                   <h2 className="text-[18px] font-[700] leading-[16px] text-[#46A358] mb-[6px]">${item.price} <span className="font-[400] line-through text-[#A5A5A5]"> {item.discount && '$'}{item.discount &&  item.discount_price}</span></h2>
                 </div>
               ))}
