@@ -35,9 +35,9 @@ function Navbar() {
     <>
       <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: 'none', maxWidth: '1200px', mx: 'auto', paddingTop: '25px', paddingBottom: '18px' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box display="flex" alignItems="center" sx={{cursor: 'pointer'}}>
+          <Link to={'/'} display="flex" alignItems="center" sx={{cursor: 'pointer'}}>
             <img src="/navbar/main_logo.svg" alt="logo" style={{ height: 40}} />
-          </Box>
+          </Link>
 
           <Box sx={{display: {xs: 'none', md: 'flex'}}}  gap={'50px'} alignItems="center">
             <Button sx={{ color: '#3D3D3D', fontSize: '16px', fontWeight: '400', lineHeight: '100%',}}>
@@ -61,9 +61,11 @@ function Navbar() {
             </IconButton>
 
             <IconButton>
-              <Badge badgeContent={6} color="success">
-                <img src="/navbar/shop_icon.svg" alt="" />
-              </Badge>
+              <Link to={'/product-card'}>
+                <Badge badgeContent={6} color="success">
+                  <img src="/navbar/shop_icon.svg" alt="" />
+                </Badge>
+              </Link>
             </IconButton>
             <Box >
                 {!user && <Button

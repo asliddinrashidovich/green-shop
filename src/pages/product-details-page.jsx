@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
 import {Link, useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
 import {MainButton} from "../components"
