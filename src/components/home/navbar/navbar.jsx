@@ -12,18 +12,19 @@ import {
     ListItemText,
     Modal,
   } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import LoginIcon from '@mui/icons-material/Login';
 import BasicTabs from '../../auth/login-modal';
 import { Toaster } from 'react-hot-toast';
 import MainButton from '../../button/button';
+import { useSelector } from 'react-redux';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const user = JSON.parse(localStorage.getItem('user'))
-  console.log(user)
+  const shoppingCard = useSelector((state) => state.shoppingSlice.data);
 
   const toggleDrawer = (state) => () => {
     setOpen(state);
@@ -62,7 +63,7 @@ function Navbar() {
 
             <IconButton>
               <Link to={'/product-card'}>
-                <Badge badgeContent={6} color="success">
+                <Badge badgeContent={shoppingCard.length} color="success">
                   <img src="/navbar/shop_icon.svg" alt="" />
                 </Badge>
               </Link>

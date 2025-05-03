@@ -34,3 +34,32 @@
     width: 200px;
   }
 }
+
+.radio-group {
+  display: flex;
+  flex-direction: column; 
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.radio-group .ant-radio-wrapper {
+  font-weight: 500;
+  color: #333;
+  border: 1px solid #46A358;
+  padding: 5px 15px;
+  width: 100%;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.radio-group .ant-radio-wrapper:hover {
+  color: #46A358;
+}
+
+.radio-group .ant-radio-wrapper-checked {
+  color: #46A358;
+}
+.radio-group .ant-radio-wrapper-checked .ant-radio-inner {
+  background-color: #46A358; 
+  border-color: #46A358;
+}

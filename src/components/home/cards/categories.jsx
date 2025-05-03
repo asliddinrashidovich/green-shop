@@ -4,6 +4,8 @@ import MainButton from "../../button/button"
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addDataToShopping } from "../../../reducers/shoppingSlice";
 
 function Categories() {
   const [age, setAge] = useState('default-sorting');
@@ -11,7 +13,7 @@ function Categories() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const dispatch = useDispatch()
 
   // useSearchparams
 
@@ -80,6 +82,10 @@ function Categories() {
       queryKey: ["flowers", {categoryBy, typeSort, sortBy, rangeMin, rangeMax}],
       queryFn: () => fetchFlowersByCategory({categoryBy, typeSort, sortBy, rangeMin, rangeMax}),
     });
+
+    function handleAddToCard(itemData) {
+      dispatch(addDataToShopping(itemData))
+    }
 
     const handleChangeSlider = (event, newValue) => {
       setValue(newValue);
@@ -182,7 +188,7 @@ function Categories() {
                   <div className="flex group overflow-hidden justify-center relative w-full h-[300px] items-center bg-[#FBFBFB] mb-3">
                     <img src={item.main_image} alt="main image" />
                     <div className="hidden gap-[20px] group-hover:flex items-center absolute bottom-[10px]">
-                      <img className="cursor-pointer" src="/navbar/shop_icon.svg" alt="shop" />
+                      <img onClick={() => handleAddToCard(item)} className="cursor-pointer" src="/navbar/shop_icon.svg" alt="shop" />
                       <img className="cursor-pointer" src="/flowers/like.svg" alt="like" />
                       <img className="cursor-pointer" src="/navbar/search_icon.svg" alt="search" />
                     </div>
