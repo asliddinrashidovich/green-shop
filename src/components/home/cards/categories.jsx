@@ -6,6 +6,10 @@ import axios from "axios";
 import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addDataToShopping } from "../../../reducers/shoppingSlice";
+import toast from "react-hot-toast";
+import CardSkleton from "../../skleteton/card-skleton";
+import { Skeleton } from "antd";
+import FlowersCards from "../../skleteton/flowers-cards";
 
 function Categories() {
   const [age, setAge] = useState('default-sorting');
@@ -70,20 +74,21 @@ function Categories() {
       return res.data;
     };
 
-    const { data: categoryData} = useQuery({
+    const { data: categoryData, isLoading: loading1} = useQuery({
       queryKey: ["category"],
       queryFn: fetchCategory,
     });
-    const { data: discountData } = useQuery({
+    const { data: discountData, isLoading: loading2 } = useQuery({
       queryKey: ["discount"],
       queryFn: fetchDiscount,
     });
-    const { data: flowersData } = useQuery({
+    const { data: flowersData , isLoading: loading3} = useQuery({
       queryKey: ["flowers", {categoryBy, typeSort, sortBy, rangeMin, rangeMax}],
       queryFn: () => fetchFlowersByCategory({categoryBy, typeSort, sortBy, rangeMin, rangeMax}),
     });
 
     function handleAddToCard(itemData) {
+      toast.success('Added to you shopping card!')
       dispatch(addDataToShopping(itemData))
     }
 
@@ -91,17 +96,25 @@ function Categories() {
       setValue(newValue);
     };
     console.log(flowersData)
+    // if(loading1, loading2, loading3) {
+    //     return (
+    //         <CardSkleton/>
+    //     )
+    // }
   return (
     <div className="max-w-[1200px] mx-auto flex gap-[50px] px-[20px] sm:px-[40px]">
         <div className="py-[14px] px-[20px] hidden lg:flex md:flex-col w-[310px]">
           <h2 className="font-[700] text-[18px] leading-[16px] mb-[7px]">Categories</h2>
           <div className="px-[12px] mb-[36px]">
-            {categoryData?.data && categoryData?.data.map((item) => (
+            {!loading1 && categoryData?.data.map((item) => (
               <div key={item.title} onClick={() => updateParams(item.route_path)} className="flex text-[#46A358] justify-between w-full cursor-pointer group">
                 <p className={`font-[700] text-[15px] leading-[40px] ${categoryBy == item.route_path ? 'text-[#46A358]' : 'text-[#3D3D3D] '}  group-hover:text-[#46A358] transition-all duration-[.3s]` }>{item.title}</p>
                 <p className={`font-[700] text-[15px] leading-[40px] ${categoryBy == item.route_path ? 'text-[#46A358]' : 'text-[#3D3D3D] '} group-hover:text-[#46A358] transition-all duration-[.3s]`}>({item.count})</p>
               </div>
             ))}
+            {loading1 && (
+              <Skeleton paragraph={{rows: 10}}/>
+            )}
           </div>
           <h2 className="font-[700] text-[18px] leading-[16px] mb-[7px]">Price Range</h2>
           <div className="px-[12px] mb-[46px]">
@@ -118,11 +131,12 @@ function Categories() {
                 <MainButton>Filter</MainButton>
               </button>
           </div>
-          <div className="pt-[22px] text-center bg-linear-to-br from-[#46A3581A] to-[#46A35808]">
+          {!loading2 && <div className="pt-[22px] text-center bg-linear-to-br from-[#46A3581A] to-[#46A35808]">
             <h2 className="font-[400] text-[51px] leading-[65px] text-[#46A358] mb-[11px]">Super Sale</h2>
             <h2 className="font-[700] text-[23px] leading-[16px] text-[#3D3D3D] mb-[5px]">UP TO {discountData?.data?.discoount_up_to}% OFF</h2>
             <img src={discountData?.data?.poster_image_url} alt="image" />
-          </div>
+          </div>}
+          {loading2 && <Skeleton.Image />}
         </div>
         <div className="w-full lg:w-[70%]">
             <div className="flex justify-between items-center mb-[35px]">
@@ -182,8 +196,8 @@ function Categories() {
                 </Modal>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-[33px]">
-              {flowersData?.data?.map((item) => (
+            {!loading3 && <div className="grid grid-cols-2 md:grid-cols-3 gap-[33px]">
+               {flowersData?.data?.map((item) => (
                 <div key={item.title}>
                   <div className="flex group overflow-hidden justify-center relative w-full h-[300px] items-center bg-[#FBFBFB] mb-3">
                     <img src={item.main_image} alt="main image" />
@@ -200,7 +214,8 @@ function Categories() {
                   <h2 className="text-[18px] font-[700] leading-[16px] text-[#46A358] mb-[6px]">${item.price} <span className="font-[400] line-through text-[#A5A5A5]"> {item.discount && '$'}{item.discount &&  item.discount_price}</span></h2>
                 </div>
               ))}
-            </div>
+            </div>}
+            {loading3 && <FlowersCards/>}
             <div className="w-full flex justify-center pt-[100px] ">
               {!flowersData?.data.length && (
                 <div className="text-center gap-[10px]">

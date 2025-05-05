@@ -32,7 +32,7 @@ const shoppingSlice = createSlice({
 
       state.total = _calcTotal(state.data);
       setter({ key: "shopping_card", setValue: state.data });
-      setter({ key: "total_price", setValue: state.total });
+      setter({ key: "total_price", setValue: state.total.toFixed(2) });
     },
     increaseCountFromShopping(state, { payload }) {
       state.data = state.data.map((value) =>

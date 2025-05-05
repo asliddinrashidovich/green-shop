@@ -1,10 +1,12 @@
 import { useState } from "react"
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { IoMdSpeedometer } from "react-icons/io";
 import { Modal } from "antd";
 
 function ProfileSection() {
-    const [activeFilter, setActiveFilter] = useState('Account Details');
+    const {pathname} = useLocation()
+    const activeFilter = pathname.split('/')[2] ? pathname.split('/')[2] : 'account-details'
+    console.log(activeFilter)
     const navigate = useNavigate()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
@@ -20,7 +22,7 @@ function ProfileSection() {
         setIsModalOpen(false);
     };
     function handleTab(path) {
-        setActiveFilter(path)
+        // setActiveFilter(path)
         navigate(`${path == 'Account Details' ? '' : path.split('').map(item => item.replace(' ', '-')).join('').toLowerCase()}`)
     }
   return (
@@ -28,25 +30,25 @@ function ProfileSection() {
         <div className="md:block hidden w-[25%] p-[18px]">
             <h2 className="font-[700] text-[18px] leading-[16px] mb-[17px]">My Account</h2>
             <div>
-                <div onClick={() => handleTab('Account Details')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer  ${activeFilter == 'Account Details' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
+                <div onClick={() => handleTab('Account Details')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer  ${activeFilter == 'account-details' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
                     <img src="/profile/user_logo.svg" alt="user" />
-                    <p className="font-[700] text-[15px] text-[#727272] leading-[45px]">Account Details</p>
+                    <p className={`font-[700] text-[15px] leading-[45px] ${activeFilter == 'account-details' ? 'text-[#46A358]' : 'text-[#727272]'}`}>Account Details</p>
                 </div>
-                <div onClick={() => handleTab('My products')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer ${activeFilter == 'My products' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
+                <div onClick={() => handleTab('My products')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer ${activeFilter == 'my-products' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
                     <img src="/profile/Bag.svg" alt="bag" />
-                    <p className="font-[700] text-[15px] text-[#727272] leading-[45px]">My products</p>
+                    <p className={`font-[700] text-[15px] leading-[45px] ${activeFilter == 'my-products' ? 'text-[#46A358]' : 'text-[#727272]'}`}>My products</p>
                 </div>
-                <div onClick={() => handleTab('Address')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer ${activeFilter == 'Address' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
+                <div onClick={() => handleTab('Address')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer ${activeFilter == 'address' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
                     <img src="/profile/Location.svg" alt="location" />
-                    <p className="font-[700] text-[15px] text-[#727272] leading-[45px]">Address</p>
+                    <p className={`font-[700] text-[15px] leading-[45px] ${activeFilter == 'address' ? 'text-[#46A358]' : 'text-[#727272]'}`}>Address</p>
                 </div>
-                <div onClick={() => handleTab('Wishlist')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer ${activeFilter == 'Wishlist' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
+                <div onClick={() => handleTab('Wishlist')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer ${activeFilter == 'wishlist' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
                     <img src="/profile/like (2).svg" alt="likes" />
-                    <p className="font-[700] text-[15px] text-[#727272] leading-[45px]">Wishlist</p>
+                    <p className={`font-[700] text-[15px] leading-[45px] ${activeFilter == 'wishlist' ? 'text-[#46A358]' : 'text-[#727272]'}`}>Wishlist</p>
                 </div>
-                <div onClick={() => handleTab('Track Order')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer ${activeFilter == 'Track Order' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
+                <div onClick={() => handleTab('Track Order')} className={`flex gap-[11px] items-center border-l-[5px] pl-[20px] cursor-pointer ${activeFilter == 'track-order' ? 'border-[#46A358]' : 'border-[#fff]'}`}> 
                     <IoMdSpeedometer style={{color: '#727272'}}/>
-                    <p className="font-[700] text-[15px] text-[#727272] leading-[45px]">Track Order</p>
+                    <p className={`font-[700] text-[15px] leading-[45px] ${activeFilter == 'track-order' ? 'text-[#46A358]' : 'text-[#727272]'}`}>Track Order</p>
                 </div>
             </div>
             <hr className="border-[0.5px] border-[#46A358] my-[30px]"/>

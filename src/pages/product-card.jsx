@@ -36,16 +36,16 @@ function ProductCard() {
                 <span className="font-[700] text-[15px] text-[#3D3D3D] leading-[16px]"> Shopping Card
                 </span>
             </div>
-            <div className="flex justify-between gap-[86px] ">
-                <div className="w-[75%]">
+            <div className="flex lg:flex-row flex-col justify-between gap-[86px] ">
+                <div className="w-full overflow-auto lg:w-[75%]">
                     <table className="w-full">
                         <thead>
                             <tr className="border-b-[1px] border-[#46A358] pb-[11px] w-full mb-[11px]">
-                                <th className="min-w-[100px] text-start font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]">Products</th>
+                                <th className="min-w-[350px] text-start font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]">Products</th>
                                 <th className="min-w-[100px] text-start font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]">Price</th>
-                                <th className="min-w-[100px] text-start font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]">Quantity</th>
-                                <th className="min-w-[100px] text-start font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]">Total</th>
-                                <th className="min-w-[10px] text-start font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]"></th>
+                                <th className="min-w-[150px] text-start font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]">Quantity</th>
+                                <th className=" text-start font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]">Total</th>
+                                <th className="min-w-[30px] text-end font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +88,7 @@ function ProductCard() {
                         </tbody>
                     </table>
                 </div>
-                <div className="w-[25%]">
+                <div className="w-full  lg:w-[25%]">
                     <h2 className="border-b-[1px] font-[700] text-[18px] leading-[16px] border-[#46A358] pb-[11px]">Card Total</h2>
                     <h3 className="font-[400] text-[14px] leading-[16px] mt-[11px] mb-2 text-[#3D3D3D]">Coupon Apply</h3>
                     <form onSubmit={handleApplyCoupon} className="w-full flex overflow-hidden mb-[30px] border-[1px] border-[#46A358] rounded-[6px]">

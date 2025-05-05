@@ -63,3 +63,14 @@
   background-color: #46A358; 
   border-color: #46A358;
 }
+.skeleton-img {
+  width: 100% !important;
+  height: 200px !important;
+}
+.delete_btn {
+  background-color: red !important;
+}
+.ant-modal-content {
+  box-shadow: 0px 0px 12px  -8px #494949 !important;
+  /* border: 2px soldi #000 !important; */
+}

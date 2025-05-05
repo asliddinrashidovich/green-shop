@@ -3,11 +3,15 @@ import { Link, useNavigate } from "react-router-dom"
 import { MainButton } from "../components"
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeEverythingZero } from "../reducers/shoppingSlice";
+import { makeEverythingZero, setTrackOrder } from "../reducers/shoppingSlice";
+import axios from "axios";
+import toast from "react-hot-toast";
 const { TextArea } = Input;
+import { compareAsc } from "date-fns";
 
 function Checkout() {
-    const [payValue, setPayValue] = useState(1);
+    const [payValue, setPayValue] = useState('Paypal');
+    const [itemId, setItemId] = useState('')
     const shopData = JSON.parse(localStorage.getItem('shopping_card'))
     const totalPrice = useSelector((state) => (state.shoppingSlice.total))
     const coupon_has = useSelector((state) => (state.shoppingSlice.coupon))
@@ -30,9 +34,19 @@ function Checkout() {
         setPayValue(e.target.value);
     };
 
-  function handleSubmit() {
-    showModal()
-  }
+    const handleSubmit = async (values) => {
+        const { firstName, lastName, paymentValue} = values;
+        
+        await axios.post(`https://green-shop-backend.onrender.com/api/order/make-order?access_token=6506e8bd6ec24be5de357927`, {shop_list: shopData, billing_address: {name: firstName, surname: lastName}, extra_shop_info: {total: totalPrice.toFixed(2), method: payValue}}).then((res) => {
+            console.log(res)
+            showModal()
+            setItemId(res.data.data._id)
+            dispatch(setTrackOrder(paymentValue))
+        }).catch((err) => {
+            toast.error('Something went wrong, Please try again')
+        })
+    };
+
   return (
     <div className="pt-9 mb-[87px] px-5 md:px-10">
         <div className="max-w-[1200px] mx-auto">
@@ -45,121 +59,94 @@ function Checkout() {
                 <div className="w-full lg:w-[60%]">
                     <h2 className="font-[700] text-[17px] leading-[16px] mb-[21px]">Billing Address</h2>
                     <Form
+                        initialValues={{
+                            firstName: "",
+                            lastName: "",
+                            paymentValue: ""
+                        }}
                         name="layout-multiple-horizontal"
-                        layout="horizontal"
-                        labelCol={{ span: 4 }}
-                        wrapperCol={{ span: 20 }}
+                        layout="vertical"
                         onFinish={handleSubmit}
-                        className='gap-[30px] grid grid-cols-1 md:grid-cols-2 '
-                    >
+                        className='form-group gap-[30px] grid grid-cols-1 md:grid-cols-2 '
+                    >   
                         <Form.Item
-                            layout="vertical"
                             label="First Name"
-                            name="first name"
+                            name="firstName"
                             rules={[{ required: true }]}
-                            labelCol={{ span: 24 }}
                             className="h-[35px]"
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='Type your first name...' />
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="Last Name"
-                            name="last name"
+                            name="lastName"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='Type your last name...' />
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="Country / Region"
                             name="country"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='Select a country / region'/>
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="Town / City"
                             name="city"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='Select a town / city'/>
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="Street Address"
                             name="street"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='House number and street name'/>
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="Extra address"
                             name="extra-address"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='Appartment, suite, unit, etc. (optional)'/>
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="State"
                             name="state"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='Select a state...'/>
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="Zip"
                             name="zip"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='Appartment, suite, unit, etc. (optional)'/>
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="Email address"
                             name="email"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Input placeholder='asliddinnorboyev@gmail.com'/>
                         </Form.Item>
 
                         <Form.Item
-                            layout="vertical"
                             label="Phone Number"
                             name="phone"
                             rules={[{ required: true }]}
                             className="h-[35px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                         >
                             <Space.Compact className='w-full'>
                                 <Input style={{ minWidth: '17%', maxWidth: '20%' }} defaultValue="+998" />
@@ -167,29 +154,24 @@ function Checkout() {
                             </Space.Compact>
                         </Form.Item>
                         <Form.Item
-                            layout="vertical"
                             label="Payment"
-                            name="pay-value"
+                            name="paymentValue"
                             rules={[{ required: true }]}
                             className="h-[140px]"
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 54 }}
                         >
                            <Radio.Group onChange={onChange} value={payValue} className="radio-group">
-                                <Radio value={1}><img src="/footer/payload.png" alt="payload" /></Radio>
-                                <Radio value={2}>Dorect bank transfer</Radio>
-                                <Radio value={3}>Cash on delivery</Radio>
+                                <Radio value={'Paypal'}><img src="/footer/payload.png" alt="payload" /></Radio>
+                                <Radio value={'Dorect bank transfer'}>Dorect bank transfer</Radio>
+                                <Radio value={'Cash on delivery'}>Cash on delivery</Radio>
                             </Radio.Group>
                         </Form.Item>
                         <div></div>
                         <Form.Item
-                            layout="vertical"
                             label="Order notes (optional)"
                             name="Message"
                             rules={[{ required: false }]}
                             className="h-[250px] col-span-2"
                             labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 54 }}
                         >
                              <TextArea rows={10} placeholder="Your order notes..." maxLength={100} />
                         </Form.Item>
@@ -201,7 +183,7 @@ function Checkout() {
                             <div className="flex justify-between mb-[40px]">
                                 <div>
                                     <h3 className="text-[14px] font-[400] leading-[16px] text-[#727272] mb-[7px]">Oreder Number</h3>
-                                    <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">Osdfsfdsr</h3>
+                                    <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">{itemId.slice(itemId.length - 14)}</h3>
                                 </div>
                                 <div>
                                     <h3 className="text-[14px] font-[400] leading-[16px] text-[#727272] mb-[7px]">Date</h3>
@@ -209,11 +191,11 @@ function Checkout() {
                                 </div>
                                 <div>
                                     <h3 className="text-[14px] font-[400] leading-[16px] text-[#727272] mb-[7px]">Total</h3>
-                                    <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">${totalPrice}</h3>
+                                    <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">${totalPrice.toFixed(2)}</h3>
                                 </div>
                                 <div>
                                     <h3 className="text-[14px] font-[400] leading-[16px] text-[#727272] mb-[7px]">Payment Method</h3>
-                                    <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">{payValue == 1 ? 'Paypal' : payValue == 2 ? 'Dorect bank transfer' : 'Cash on delivery'}</h3>
+                                    <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">{payValue}</h3>
                                 </div>
                             </div>
                             <h2 className="text-[17px] font-[700] leading-[16px] mb-[12px] text-[#3D3D3D]">Order Details</h2>
