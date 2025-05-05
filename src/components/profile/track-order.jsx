@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Modal } from "antd";
+import { Modal, Skeleton } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 function TrackOrder() {
   const now = new Date()
+  const dataArray = [0,0,0,0,0,0,0] 
   const [activeOrder, setActiveOrder] = useState(null);
   const queryClient = useQueryClient();
   const coupon_has = useSelector((state) => (state.shoppingSlice.coupon))
@@ -31,18 +32,30 @@ function TrackOrder() {
         queryClient.invalidateQueries(["order"]);
     }
   
-  const { data: orderData} = useQuery({
+  const { data: orderData, isLoading: loading} = useQuery({
     queryKey: ["order"],
     queryFn: getOrders,
   });
   console.log(orderData)
+
+  if(loading) {
+    return (
+        <>
+            {dataArray.map((item, i) => (
+                <div key={i} className="py-[20px]">
+                    <Skeleton active paragraph={{ rows: 2 }} />
+                </div>
+            ))}
+        </>
+    )
+  }
   return (
     <>
       <h2 className="text-[20px] font-[700] text-[#3D3D3D] mb-[20px]">Track your Orders</h2>
       {orderData?.data.map(item => (
          <div key={item._id} className="flex justify-between mb-[40px]">
             <div>
-                <h3 className="text-[14px] font-[400] leading-[16px] text-[#727272] mb-[7px]">Oreder Number</h3>
+                <h3 className="text-[14px] font-[400] leading-[16px] text-[#727272] mb-[7px]">Order Number</h3>
                 <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">{item._id.slice(item._id.length-14, item._id.length)}</h3>
             </div>
             <div>
@@ -102,11 +115,11 @@ function TrackOrder() {
                         </tr>
                         </thead>
                         <tbody>
-                        {activeOrder.shop_list.map(itemData => (
+                        {activeOrder?.shop_list.map(itemData => (
                             <tr key={itemData._id}>
                                 <td className="flex items-center gap-[14px] mt-[10px]">
                                     <div className="w-[70px] h-[70px] p-1 gap-[14px] overflow-hidden">
-                                    <img src={itemData.main_image} alt="img" className="w-full" />
+                                    <img src={itemData?.main_image ? itemData?.main_image : itemData.image} alt="img" className="w-full" />
                                     </div>
                                     <div>
                                     <h2 className="text-[16px] font-[500] leading-[16px] text-[#3D3D3D] mb-[10px]">{itemData.title}</h2>

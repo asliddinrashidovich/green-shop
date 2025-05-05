@@ -15,6 +15,7 @@ function ProfileSection() {
     const handleOk = () => {
         setIsModalOpen(false);
         localStorage.removeItem('user')
+        localStorage.removeItem('token')
         navigate('/')
         window.location.reload();
     };
@@ -22,7 +23,6 @@ function ProfileSection() {
         setIsModalOpen(false);
     };
     function handleTab(path) {
-        // setActiveFilter(path)
         navigate(`${path == 'Account Details' ? '' : path.split('').map(item => item.replace(' ', '-')).join('').toLowerCase()}`)
     }
   return (

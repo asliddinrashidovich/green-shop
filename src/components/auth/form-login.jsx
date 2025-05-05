@@ -16,7 +16,9 @@ function FormLogin({setOpen2}) {
   const postLogin = async () => {
       await axios.post(`https://green-shop-backend.onrender.com/api/user/sign-in?access_token=6506e8bd6ec24be5de357927`, {password, email}).then((res) => {
         setOpen2(false)
+        console.log(res)
         localStorage.setItem('user', JSON.stringify(res.data.data.user))
+        localStorage.setItem('token', res.data.data.token)
       }).catch((err) => {
         if(err.status == 409) {
           toast.error('User Not found, please Try again')
@@ -31,6 +33,7 @@ function FormLogin({setOpen2}) {
       await axios.post(`https://green-shop-backend.onrender.com/api/user/sign-in/google?access_token=6506e8bd6ec24be5de357927`, {email: res?.user?.email}).then((res) => {
         setOpen2(false)
         localStorage.setItem('user', JSON.stringify(res.data.data.user))
+        localStorage.setItem('token', res.data.data.token)
       }).catch((err) => {
         if(err.status == 409) {
           toast.error('Email already exists')

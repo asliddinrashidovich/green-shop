@@ -3,7 +3,7 @@ import MainLayout from "./layout/main-layout"
 import Homepage from "./pages/homepage"
 import ProfilePage from "./pages/profile"
 import { AccountDetails, Address, BlogDetails, MyProducts, TrackOrder, Wishlist } from "./components"
-import NotFound from "./pages/not-found"
+import NotFoundPage from "./pages/not-found"
 import PropTypes from "prop-types"
 import BlogsPage from "./pages/blog"
 import ProductDetailsPage from "./pages/product-details-page"
@@ -22,7 +22,7 @@ function App() {
     if(isAuth()) {
       return children
     } else {
-      return <NotFound/>
+      return <NotFoundPage/>
     }
   }
   const routes = createBrowserRouter(
@@ -41,7 +41,7 @@ function App() {
           <Route path="wishlist" element={<Wishlist><Wishlist/></Wishlist>}/>
           <Route path="track-order" element={<ProtectedRoute><TrackOrder/></ProtectedRoute>}/>
         </Route>
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="*" element={<NotFoundPage/>}/>
       </Route>
     )
   )

@@ -3,7 +3,7 @@ import { deletter, getter, setter } from "../hooks/useLocalStorage";
 
 const _calcTotal = (data) => {
   return data.reduce(
-    (acc, currentValue) => currentValue?.count * currentValue?.price + acc,
+    (acc, currentValue) => (currentValue?.count * (currentValue?.price * 100)) / 100 + acc,
     0,
   );
 };
@@ -32,7 +32,7 @@ const shoppingSlice = createSlice({
 
       state.total = _calcTotal(state.data);
       setter({ key: "shopping_card", setValue: state.data });
-      setter({ key: "total_price", setValue: state.total.toFixed(2) });
+      setter({ key: "total_price", setValue: state.total });
     },
     increaseCountFromShopping(state, { payload }) {
       state.data = state.data.map((value) =>

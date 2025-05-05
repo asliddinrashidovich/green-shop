@@ -1,13 +1,11 @@
 import { Form, Input, Modal, Radio, Space } from "antd"
 import { Link, useNavigate } from "react-router-dom"
-import { MainButton } from "../components"
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeEverythingZero, setTrackOrder } from "../reducers/shoppingSlice";
 import axios from "axios";
 import toast from "react-hot-toast";
 const { TextArea } = Input;
-import { compareAsc } from "date-fns";
 
 function Checkout() {
     const [payValue, setPayValue] = useState('Paypal');
@@ -37,7 +35,7 @@ function Checkout() {
     const handleSubmit = async (values) => {
         const { firstName, lastName, paymentValue} = values;
         
-        await axios.post(`https://green-shop-backend.onrender.com/api/order/make-order?access_token=6506e8bd6ec24be5de357927`, {shop_list: shopData, billing_address: {name: firstName, surname: lastName}, extra_shop_info: {total: totalPrice.toFixed(2), method: payValue}}).then((res) => {
+        await axios.post(`https://green-shop-backend.onrender.com/api/order/make-order?access_token=6506e8bd6ec24be5de357927`, {shop_list: shopData, billing_address: {name: firstName, surname: lastName}, extra_shop_info: {total: totalPrice, method: payValue}}).then((res) => {
             console.log(res)
             showModal()
             setItemId(res.data.data._id)
@@ -65,11 +63,16 @@ function Checkout() {
                             paymentValue: ""
                         }}
                         name="layout-multiple-horizontal"
-                        layout="vertical"
+                        layout="horizontal"
+                        labelCol={{ span: 4 }}
+                        wrapperCol={{ span: 20 }}
                         onFinish={handleSubmit}
-                        className='form-group gap-[30px] grid grid-cols-1 md:grid-cols-2 '
+                        className='gap-[30px] grid grid-cols-1 sm:grid-cols-2'
                     >   
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="First Name"
                             name="firstName"
                             rules={[{ required: true }]}
@@ -78,6 +81,9 @@ function Checkout() {
                             <Input placeholder='Type your first name...' />
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="Last Name"
                             name="lastName"
                             rules={[{ required: true }]}
@@ -86,6 +92,9 @@ function Checkout() {
                             <Input placeholder='Type your last name...' />
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="Country / Region"
                             name="country"
                             rules={[{ required: true }]}
@@ -94,6 +103,9 @@ function Checkout() {
                             <Input placeholder='Select a country / region'/>
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="Town / City"
                             name="city"
                             rules={[{ required: true }]}
@@ -102,6 +114,9 @@ function Checkout() {
                             <Input placeholder='Select a town / city'/>
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="Street Address"
                             name="street"
                             rules={[{ required: true }]}
@@ -110,6 +125,9 @@ function Checkout() {
                             <Input placeholder='House number and street name'/>
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="Extra address"
                             name="extra-address"
                             rules={[{ required: true }]}
@@ -118,6 +136,9 @@ function Checkout() {
                             <Input placeholder='Appartment, suite, unit, etc. (optional)'/>
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="State"
                             name="state"
                             rules={[{ required: true }]}
@@ -126,6 +147,9 @@ function Checkout() {
                             <Input placeholder='Select a state...'/>
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="Zip"
                             name="zip"
                             rules={[{ required: true }]}
@@ -134,6 +158,9 @@ function Checkout() {
                             <Input placeholder='Appartment, suite, unit, etc. (optional)'/>
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="Email address"
                             name="email"
                             rules={[{ required: true }]}
@@ -143,17 +170,23 @@ function Checkout() {
                         </Form.Item>
 
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             label="Phone Number"
                             name="phone"
                             rules={[{ required: true }]}
                             className="h-[35px]"
                         >
                             <Space.Compact className='w-full'>
-                                <Input style={{ minWidth: '17%', maxWidth: '20%' }} defaultValue="+998" />
+                                <Input style={{ width: '60px' }} defaultValue="+998" />
                                 <Input style={{ width: '85%' }} defaultValue="" placeholder="Type your phone number" />
                             </Space.Compact>
                         </Form.Item>
                         <Form.Item
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 44 }}
                             label="Payment"
                             name="paymentValue"
                             rules={[{ required: true }]}
@@ -166,16 +199,18 @@ function Checkout() {
                             </Radio.Group>
                         </Form.Item>
                         <div></div>
-                        <Form.Item
+                        <Form.Item  
+                            layout="vertical"
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 44 }}
                             label="Order notes (optional)"
                             name="Message"
                             rules={[{ required: false }]}
-                            className="h-[250px] col-span-2"
-                            labelCol={{ span: 24 }}
+                            className="h-[250px]  sm:col-span-2"
                         >
                              <TextArea rows={10} placeholder="Your order notes..." maxLength={100} />
                         </Form.Item>
-                        <button  type="submit" className="col-span-2 w-full p-[10px] bg-[#46A358] cursor-pointer text-[16px] text-[#fff] rounded-[5px]">
+                        <button  type="submit" className="sm:col-span-2 w-full p-[10px] bg-[#46A358] cursor-pointer text-[16px] text-[#fff] rounded-[5px]">
                             Place Order
                         </button>
                         <Modal title="Order Confirmation" onCancel={handleCancel} open={isModalOpen} footer={null}>
@@ -191,7 +226,7 @@ function Checkout() {
                                 </div>
                                 <div>
                                     <h3 className="text-[14px] font-[400] leading-[16px] text-[#727272] mb-[7px]">Total</h3>
-                                    <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">${totalPrice.toFixed(2)}</h3>
+                                    <h3 className="text-[15px] font-[700] leading-[16px] text-[#3D3D3D]">${totalPrice}</h3>
                                 </div>
                                 <div>
                                     <h3 className="text-[14px] font-[400] leading-[16px] text-[#727272] mb-[7px]">Payment Method</h3>
@@ -222,7 +257,7 @@ function Checkout() {
                                                 </div>
                                                 <h2 className="flex ">(x {item.count})</h2>
                                             </td>
-                                            <td className="text-[#46A358] text-[16px] text-end leading-[16px] font-[700]">${(item.price * item.count).toFixed(2)}</td>
+                                            <td className="text-[#46A358] text-[16px] text-end leading-[16px] font-[700]">${(item.price * item.count)}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -234,8 +269,8 @@ function Checkout() {
                             <div className="flex justify-between items-center mb-[30px]">
                                 <h2 className="text-[#3D3D3D] text-[16px] leading-[16px] font-[500] ">Total</h2>
                                 <div className="flex flex-col gap-[10px]">
-                                    <h3 className={` text-[18px] leading-[16px] font-[700] ${coupon_has.has_coupon ? 'line-through text-[#3D3D3D]' : 'text-[#46A358]'}`}>${totalPrice.toFixed(2)}</h3>
-                                    {coupon_has.has_coupon && <h3 className="text-[#46A358] text-[18px] leading-[16px] font-[700] ">${(totalPrice / 100 *( 100 - coupon_has.discount_for)).toFixed(2)}</h3>}
+                                    <h3 className={` text-[18px] leading-[16px] font-[700] ${coupon_has.has_coupon ? 'line-through text-[#3D3D3D]' : 'text-[#46A358]'}`}>${totalPrice}</h3>
+                                    {coupon_has.has_coupon && <h3 className="text-[#46A358] text-[18px] leading-[16px] font-[700] ">${(totalPrice / 100 *( 100 - coupon_has.discount_for))}</h3>}
                                 </div>
                             </div>
                             <hr className="mb-[10px] border-[#46A358]"/>
@@ -271,18 +306,18 @@ function Checkout() {
                                         </div>
                                         <h2 className="flex ">(x {item.count})</h2>
                                     </td>
-                                    <td className="text-[#46A358] text-[16px] text-end leading-[16px] font-[700]">${(item.price * item.count).toFixed(2)}</td>
+                                    <td className="text-[#46A358] text-[16px] text-end leading-[16px] font-[700]">${(item.price * item.count)}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                     <div className="flex justify-between items-center mb-[20px]">
                         <h2 className="text-[#3D3D3D] text-[15px] leading-[16px] font-[400] ">Subtotal</h2>
-                        <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">${totalPrice.toFixed(2)}</h3>
+                        <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">${totalPrice}</h3>
                     </div>
                     <div className="flex justify-between items-center mb-[20px]">
                         <h2 className="text-[#3D3D3D] text-[15px] leading-[16px] font-[400] ">Coupon Discount</h2>
-                        <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">(-)  { coupon_has.has_coupon ? (totalPrice / 100 *(coupon_has.discount_for)).toFixed(2) : '00.00'}</h3>
+                        <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">(-)  { coupon_has.has_coupon ? (totalPrice / 100 *(coupon_has.discount_for)) : '00.00'}</h3>
                     </div>
                     <div className="flex justify-between items-center mb-[26px]">
                         <h2 className="text-[#3D3D3D] text-[15px] leading-[16px] font-[400] ">Shiping</h2>
@@ -291,8 +326,8 @@ function Checkout() {
                     <div className="flex justify-between items-center mb-[30px]">
                         <h2 className="text-[#3D3D3D] text-[16px] leading-[16px] font-[700] ">Total</h2>
                         <div className="flex flex-col gap-[10px]">
-                            <h3 className={` text-[18px] leading-[16px] font-[700] ${coupon_has.has_coupon ? 'line-through text-[#3D3D3D]' : 'text-[#46A358]'}`}>${totalPrice.toFixed(2)}</h3>
-                            {coupon_has.has_coupon && <h3 className="text-[#46A358] text-[18px] leading-[16px] font-[700] ">${(totalPrice / 100 *( 100 - coupon_has.discount_for)).toFixed(2)}</h3>}
+                            <h3 className={` text-[18px] leading-[16px] font-[700] ${coupon_has.has_coupon ? 'line-through text-[#3D3D3D]' : 'text-[#46A358]'}`}>${totalPrice}</h3>
+                            {coupon_has.has_coupon && <h3 className="text-[#46A358] text-[18px] leading-[16px] font-[700] ">${(totalPrice / 100 *( 100 - coupon_has.discount_for))}</h3>}
                         </div>
                     </div>
                 </div>

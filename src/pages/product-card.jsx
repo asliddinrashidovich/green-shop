@@ -5,6 +5,8 @@ import { useState } from "react"
 import axios from "axios"
 import toast from "react-hot-toast"
 import { TiDelete } from "react-icons/ti";
+import NotFound from "../components/profile/not-found"
+import { MainButton } from "../components"
 
 function ProductCard() {
     const shopData = JSON.parse(localStorage.getItem('shopping_card'))
@@ -28,6 +30,14 @@ function ProductCard() {
         dispatch(setNotCoupon())
         setCouponCode('')
     }
+    console.log(shopData)
+    function handleCheckout() {
+        if(shopData) {
+            navigate('/product-checkout')
+        } else {
+            toast.error('Nothing to proceed!')
+        }
+    }
   return (
     <div className="pt-9 mb-[87px] px-5 md:px-10">
         <div className="max-w-[1200px] mx-auto">
@@ -48,8 +58,8 @@ function ProductCard() {
                                 <th className="min-w-[30px] text-end font-[500] text-[16px] leading-[16px] pb-[11px] text-[#3D3D3D]"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                           {shopData.map(item => (
+                        <tbody >
+                           {shopData && shopData.map(item => (
                              <tr key={item._id}>
                                 <td className="flex items-center gap-[14px] mt-[10px]">
                                     <div className="w-[70px] h-[70px] p-1 gap-[14px] overflow-hidden">
@@ -79,12 +89,21 @@ function ProductCard() {
                                         </button>
                                     </div>
                                 </td>
-                                <td className="text-[#46A358] text-[20px] leading-[16px] font-[700]">${(item.price * item.count).toFixed(2)}</td>
+                                <td className="text-[#46A358] text-[20px] leading-[16px] font-[700]">${((item.price * 100)/100 * item.count)}</td>
                                 <td>
                                     <img onClick={() => dispatch(deleteFlowerFromShopping(item))} className="cursor-pointer" src="/add-to-card/Delete.svg" alt="delete" />
                                 </td>
                             </tr>
                            ))}
+                           {shopData.length == 0 && 
+                            <tr>
+                                <td colSpan={5} className="text-[center]">
+                                    <NotFound>No data</NotFound>
+                                    <Link to={'/'} className="mx-auto block w-[110px] mt-[20px]">
+                                        <MainButton>{"Let's Shop"}</MainButton>
+                                    </Link>
+                                </td>
+                            </tr>}
                         </tbody>
                     </table>
                 </div>
@@ -100,25 +119,24 @@ function ProductCard() {
                     </form>
                     <div className="flex justify-between items-center mb-[20px]">
                         <h2 className="text-[#3D3D3D] text-[15px] leading-[16px] font-[400] ">Subtotal</h2>
-                        <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">${totalPrice.toFixed(2)}</h3>
+                        <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">${totalPrice}</h3>
                     </div>
                     <div className="flex justify-between items-center mb-[20px]">
                         <h2 className="text-[#3D3D3D] text-[15px] leading-[16px] font-[400] ">Coupon Discount</h2>
-                        <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">(-)  { coupon_has.has_coupon ? (totalPrice / 100 *(coupon_has.discount_for)).toFixed(2) : '00.00'}</h3>
+                        <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">(-)  { coupon_has.has_coupon ? (totalPrice / 100 *(coupon_has.discount_for)) : '00.00'}</h3>
                     </div>
                     <div className="flex justify-between items-center mb-[26px]">
                         <h2 className="text-[#3D3D3D] text-[15px] leading-[16px] font-[400] ">Shiping</h2>
                         <h3 className="text-[#3D3D3D] text-[18px] leading-[16px] font-[500] ">$16.00</h3>
                     </div>
-                    {/* <h2 className="text-[#46A358] text-[15px] leading-[16px] font-[400] text-end mb-[26px]">View shipping charge</h2> */}
                     <div className="flex justify-between items-center mb-[30px]">
                         <h2 className="text-[#3D3D3D] text-[16px] leading-[16px] font-[700] ">Total</h2>
                         <div className="flex flex-col gap-[10px]">
-                            <h3 className={` text-[18px] leading-[16px] font-[700] ${coupon_has.has_coupon ? 'line-through text-[#3D3D3D]' : 'text-[#46A358]'}`}>${totalPrice.toFixed(2)}</h3>
-                            {coupon_has.has_coupon && <h3 className="text-[#46A358] text-[18px] leading-[16px] font-[700] ">${(totalPrice / 100 *( 100 - coupon_has.discount_for)).toFixed(2)}</h3>}
+                            <h3 className={` text-[18px] leading-[16px] font-[700] ${coupon_has.has_coupon ? 'line-through text-[#3D3D3D]' : 'text-[#46A358]'}`}>${totalPrice}</h3>
+                            {coupon_has.has_coupon && <h3 className="text-[#46A358] text-[18px] leading-[16px] font-[700] ">${(totalPrice / 100 *( 100 - coupon_has.discount_for))}</h3>}
                         </div>
                     </div>
-                    <button onClick={() =>  navigate('/product-checkout')}  className="w-full active:bg-[#265d31] bg-[#46A358] text-[#FFFFFF] py-3 rounded-[4px] mb-[14px] cursor-pointer font-[700] text-[15px]">
+                    <button onClick={() =>  handleCheckout()}  className="w-full active:bg-[#265d31] bg-[#46A358] text-[#FFFFFF] py-3 rounded-[4px] mb-[14px] cursor-pointer font-[700] text-[15px]">
                         Proceed To Checkout
                     </button>
                     <Link to={'/'} className="text-[15px] inline-block w-full font-[400] leading-[16px] text-[#46A358] cursor-pointer text-center">Continue Shopping</Link>

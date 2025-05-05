@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-function NotFound() {
+function NotFoundPage() {
   return (
     <div className="text-center animate-fadeIn h-[100vh] flex items-center justify-center flex-col">
         <img src="https://yemca-services.net/404.png" alt="404 Illustration" className="mx-auto w-80 animate-[float_3s_infinite] shadow-xl rounded-lg" /> 
@@ -11,4 +11,4 @@ function NotFound() {
   )
 }
 
-export default NotFound
+export default NotFoundPage
