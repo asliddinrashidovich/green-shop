@@ -29,27 +29,27 @@ function Footer() {
             <Typography variant="h5" sx={{fontWeight: '700', fontSize: '18px', color:'#3D3D3D', marginBottom: '20px'}}>Social Media</Typography>
             <Box sx={{display: 'flex', gap: '10px', marginBottom: '33px'}}>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <a href="https://www.facebook.com/profile.php?id=61568348277987">
+                <a target="_blank" rel="noopener" href="https://www.facebook.com/profile.php?id=61568348277987">
                   <img src="/footer/Facebook.svg" className="w-[8px]" alt="facebook" />
                 </a>
               </Box>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <a href="https://www.instagram.com/asliddin.norboyev_/">
+                <a target="_blank" rel="noopener" href="https://www.instagram.com/asliddin.norboyev_/">
                   <img src="/footer/Instagram.svg" className="w-[14px]" alt="facebook" />
                 </a>
               </Box>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <a href="https://x.com/">
+                <a target="_blank" rel="noopener" href="https://x.com/">
                   <img src="/footer/Twitter.svg" className="w-[16px]" alt="facebook" />
                 </a>
               </Box>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <a href="https://www.linkedin.com/in/asliddinnorboyev">
+                <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/asliddinnorboyev">
                   <img src="/footer/Linkedin.svg" className="w-[14px]" alt="facebook" />
                 </a>
               </Box>
               <Box sx={{display: 'flex', width: '30px', cursor: "pointer", justifyContent: 'center', alignItems: 'center', height: '30px', border: '1px solid #46A35833', borderRadius: '4px'}}>
-                <a href="https://www.youtube.com/@AsliddinNorboyev_blog">
+                <a target="_blank" rel="noopener" href="https://www.youtube.com/@AsliddinNorboyev_blog">
                   <img src="/footer/Union.svg" className="w-[18px]" alt="facebook" />
                 </a>
               </Box>
