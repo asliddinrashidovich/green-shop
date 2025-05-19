@@ -1,14 +1,16 @@
+import i18n from "../i18n";
+
 export const heroSlider = [
     {
-        headerText: "LET'S MAKE A BETTER",
+        headerText: i18n.t('heroSlider1'),
         img: '/hero/flover_big1.png',
     },
     {
-        headerText: "LET'S LIVE IN A BETTER",
+        headerText: i18n.t('heroSlider2'),  
         img: '/hero/hero-flower-3.png',
     },
     {
-        headerText: "LET'S OBSERVE A BETTER",
+        headerText: i18n.t('heroSlider2'),      
         img: '/hero/hero-flower-2.png',
     }
 ]

@@ -20,10 +20,13 @@ import BasicTabs from '../../auth/login-modal';
 import { Toaster } from 'react-hot-toast';
 import MainButton from '../../button/button';
 import { useSelector } from 'react-redux';
+import LanguageChanger from '../../language/language-changer';
+import { useTranslation } from 'react-i18next';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const user = JSON.parse(localStorage.getItem('user'))
+  const {t} = useTranslation()
   const shoppingCard = useSelector((state) => state.shoppingSlice.data);
 
   const toggleDrawer = (state) => () => {
@@ -42,10 +45,10 @@ function Navbar() {
 
           <Box sx={{display: {xs: 'none', md: 'flex'}}}  gap={'50px'} alignItems="center">
             <Button sx={{ color: '#3D3D3D', fontSize: '16px', fontWeight: '400', lineHeight: '100%',}}>
-                <Link to={'/'}>Home</Link>
+                <Link to={'/'}>{t('navbarHome')}</Link>
             </Button>
             <Button sx={{ color: '#3D3D3D', fontSize: '16px', fontWeight: '400', lineHeight: '100%',}}>
-                <Link to={'/blog'}>Blog</Link>
+                <Link to={'/blog'}>{t('navbarPosts')}</Link>
             </Button>
           </Box>
           <Toaster
@@ -55,10 +58,7 @@ function Navbar() {
 
           <Box display="flex" sx={{gap: {xs: '15px', md:'30px'}}} alignItems="center">
             <IconButton>
-              <img src="/navbar/search_icon.svg" alt="" />
-            </IconButton>
-            <IconButton sx={{display: {xs: 'none', md: 'flex'}}}>
-              <svg className='text-[#3D3D3D]' viewBox="64 64 896 896" focusable="false" data-icon="bell" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M816 768h-24V428c0-141.1-104.3-257.7-240-277.1V112c0-22.1-17.9-40-40-40s-40 17.9-40 40v38.9c-135.7 19.4-240 136-240 277.1v340h-24c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h216c0 61.8 50.2 112 112 112s112-50.2 112-112h216c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM512 888c-26.5 0-48-21.5-48-48h96c0 26.5-21.5 48-48 48zM304 768V428c0-55.6 21.6-107.8 60.9-147.1S456.4 220 512 220c55.6 0 107.8 21.6 147.1 60.9S720 372.4 720 428v340H304z"></path></svg>
+              <LanguageChanger/>
             </IconButton>
 
             <IconButton>
