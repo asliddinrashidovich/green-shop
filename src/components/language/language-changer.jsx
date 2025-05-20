@@ -8,7 +8,6 @@ function LanguageChanger() {
   const handleLanguageChange = (e) => {
     dispatch(setLanguage(e));
     console.log(e);
-    
   };
 
   return (
@@ -25,6 +24,7 @@ function LanguageChanger() {
             options={[
                 { value: 'en', label: 'en' },
                 { value: 'uz', label: 'uz' },
+                { value: 'ru', label: 'ru' },
             ]}
         />
     </div>
